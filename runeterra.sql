@@ -30,7 +30,7 @@ create table venda (
 
 create table item_venda (
 	id_produto integer foreign key references produto (id_produto),
-	id_venda integer foreign key references venda (id),
+	id_venda integer foreign key references venda (id_venda),
 	quantidade integer,
 	valor numeric (18,3),
 	desconto numeric(6,3)
