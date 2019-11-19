@@ -10,7 +10,7 @@ services:
        POSTGRES_USER: runed
        POSTGRES_PASSWORD: 123
     volumes:
-       - ./db/runeterra.sql:/docker-entrypoint-initdb.d/init.sql
+       - ./db/runeterra.sql:/docker-entrypoint-initdb.d/
 
   adminer:
     image: adminer

@@ -80,8 +80,8 @@ create table usuario_permissao (
 create table produto_categoria (
 	id_produto integer,
 	id_categoria integer,
-	foreign key (id_produto) references produto (id_produto),
-	foreign key (id_categoria) references categoria (id_categoria)
+	foreign key (id_produto) produto (id_produto),
+	foreign key (id_categoria) categoria (id_categoria)
 );
 
 /*******************
