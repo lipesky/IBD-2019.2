@@ -16,7 +16,9 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Collapse
+  Collapse,
+  Hidden,
+  Container
 } from '@material-ui/core';
 import {
   Visibility,
@@ -27,6 +29,8 @@ import {
 } from '@material-ui/icons';
 import user_profile_foto from './img/luscas.png';
 
+const drawer_width = 300;
+
 const styles = makeStyles(theme => ({
 	userProfileFoto :{
 		margin: 10
@@ -35,22 +39,25 @@ const styles = makeStyles(theme => ({
 		width: 60,
 		height: 60
 	},
-	menu_toolbar:{
-		//display: 'flex',
-		//justifyContent: 'space-between'
-	},
 	menu_toolbar_title:{
 		flexGrow:1
 	},
 	menu_list:{
-		width: 350
+		width: drawer_width
 	},
 	menu_subitem:{
 		width: '90%',
 		marginLeft: '10%'
 	},
 	toolbar_user_info:{
-
+		textAlign: 'left'
+	},
+	drawer:{
+		width: drawer_width
+	},
+	AppBar:{
+		width: 'calc(100% - '+ (window.innerWidth >= 768 ? drawer_width : 0) +'px)',
+		marginRight: window.innerWidth >= 768 ? drawer_width : 0
 	}
 }));
 
@@ -66,7 +73,7 @@ function getListItem(item, index, fclick, subitem = false){
 			}
 		});
 		return (
-			<React.Fragment>
+			<React.Fragment key={item.text} >
 				<ListItem 
 					button 
 					key={item.text} 
@@ -95,8 +102,10 @@ function getListItem(item, index, fclick, subitem = false){
 function FMenu(props){
 	const [menu_openned, set_menu_openned] = React.useState(false);
 	const [menu_list, set_menu_list] = React.useState([...props.menu]);
+	const { container } = props;
 
 	const classes = styles();
+	const drawer_variant = window.innerWidth >= 768 ? 'permanent' : 'temporary';
 
 	const handle_menu_item_click = (function(item, index){
 		var menu = [...props.menu];
@@ -106,11 +115,11 @@ function FMenu(props){
 	const menu_change = (function(){
 		set_menu_openned(!menu_openned);
 	});
-
 	return (
 		<React.Fragment>
 			 <AppBar
 		        position="fixed"
+		        className={classes.AppBar}
 		      >
 		      	<Toolbar className={classes.menu_toolbar}>
 		      		<IconButton className={classes.userProfileFoto}>
@@ -122,9 +131,9 @@ function FMenu(props){
 		      		</IconButton>
 		      		<Box className={classes.menu_toolbar_title}>
 		      			<Grid>
-		      				<Grid sm={3} 
-		      					  className={classes.toolbar_user_info}>
+		      				<Grid item sm={3}>
 			      				<Typography
+			      					className={classes.toolbar_user_info}
 			      					sm={12}
 			      					>User Name</Typography>
 			      			</Grid>
@@ -133,7 +142,8 @@ function FMenu(props){
 			      			</Typography>
 		      			</Grid>
 		      		</Box>
-		      		<IconButton
+		      		<Hidden mdUp>
+		      			<IconButton
 		      			edge="start" 
 		      			color="inherit" 
 		      			aria-label="menu"
@@ -141,22 +151,31 @@ function FMenu(props){
 
 		            	<MenuIcon />
 
-		          	</IconButton>
+		          		</IconButton>
+		      		</Hidden>
 		      	</Toolbar>
-		      	<Drawer 
-		      		open={menu_openned}
-		      		onClose={menu_change}
-		      		>
-		      		<List
-		      			className={classes.menu_list} >
-		      			{
-		      				menu_list.map(
-		      					(value, index) =>
-		      						getListItem(value, index, handle_menu_item_click)
-		      						)
-		      			}
-		      		</List>
-		      	</Drawer>
+		      	<nav classe={classes.drawer}>
+			      	<Drawer
+			      		container={container}
+			      		open={menu_openned}
+			      		onClose={menu_change}
+			      		anchor="right"
+			      		variant={drawer_variant}
+			      		classes={{ paper: classes.drawer}}
+			      		ModalProps={{
+			              keepMounted: true, // Better open performance on mobile.
+			            }}		      		>
+			      		<List
+			      			className={classes.menu_list} >
+			      			{
+			      				menu_list.map(
+			      					(value, index) =>
+			      						getListItem(value, index, handle_menu_item_click)
+			      						)
+			      			}
+			      		</List>
+			      	</Drawer>
+			    </nav>
 		      </AppBar>
 		</React.Fragment>
 		);
