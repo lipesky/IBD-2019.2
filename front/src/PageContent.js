@@ -21,9 +21,9 @@ import {
   ExpandMore,
   ExpandLess
 } from '@material-ui/icons';
-import Produto from './pages/Produto'
-function PageContent(props){
+import Produto from './pages/Produto';
 
+function PageContent(props){
   return (
       <Produto />
     );

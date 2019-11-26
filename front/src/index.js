@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import Login from './Login';
-import PageContent from './PageContent';
 import * as serviceWorker from './serviceWorker';
 import {
   BrowserRouter as Router,
@@ -54,7 +53,6 @@ ReactDOM.render(<Router>
                     </Route>
                     <Route path="/">
                       <App data={data} />
-                      <PageContent />
                     </Route>
                   </Switch>
                 </Router>, document.getElementById('root'));

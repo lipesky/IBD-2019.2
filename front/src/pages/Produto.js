@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import '../App.css';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Grid,
@@ -14,7 +14,8 @@ import {
   Collapse,
   Hidden,
   Container,
-  TextField
+  TextField,
+  Select
 } from '@material-ui/core';
 import {
   Visibility,
@@ -23,11 +24,41 @@ import {
   ExpandLess
 } from '@material-ui/icons';
 
-function Produto(props){
+const styles = makeStyles(theme => ({
+  toolbar: theme.mixins.toolbar
+}));
 
+function Produto(props){
+  const classes = styles();
   return (
       <Container>
-        <Grid></Grid>
+
+        <Grid>
+          <TextField 
+            label="Descrição"            
+          />
+          <TextField 
+            label="EAN"            
+          />
+          <Select 
+            label="Categoria"
+          />
+          <TextField 
+            label="Peso"            
+          />
+          <TextField 
+            label="Unidade"            
+          />
+          <TextField 
+            label="Preço"            
+          />
+          <TextField 
+            label="Descrição"            
+          />
+          <TextField 
+            label="Descrição"            
+          />
+        </Grid>
       </Container>
     );
 }

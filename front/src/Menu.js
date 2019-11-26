@@ -32,12 +32,13 @@ import user_profile_foto from './img/luscas.png';
 const drawer_width = 300;
 
 const styles = makeStyles(theme => ({
+	toolbar: theme.mixins.toolbar,
 	userProfileFoto :{
-		margin: 10
+		//margin: 10
 	},
 	userProfileFotoAvatar :{
-		width: 60,
-		height: 60
+		//width: 60,
+		//height: 60
 	},
 	menu_toolbar_title:{
 		flexGrow:1
@@ -117,67 +118,68 @@ function FMenu(props){
 	});
 	return (
 		<React.Fragment>
-			 <AppBar
-		        position="fixed"
-		        className={classes.AppBar}
-		      >
-		      	<Toolbar className={classes.menu_toolbar}>
-		      		<IconButton className={classes.userProfileFoto}>
-			      		<Avatar 
-		      				className={classes.userProfileFotoAvatar}
-		      				edge="end" 
-		      				alt="Nome do usuario" 
-		      				src={user_profile_foto} />
-		      		</IconButton>
-		      		<Box className={classes.menu_toolbar_title}>
-		      			<Grid>
-		      				<Grid item sm={3}>
-			      				<Typography
-			      					className={classes.toolbar_user_info}
-			      					sm={12}
-			      					>User Name</Typography>
-			      			</Grid>
-			      			<Typography>
-			      				Runeterra
-			      			</Typography>
+		 <AppBar
+	        position="fixed"
+	        className={classes.AppBar}
+	      >
+	      	<Toolbar className={classes.menu_toolbar}>
+	      		<IconButton className={classes.userProfileFoto}>
+		      		<Avatar 
+	      				className={classes.userProfileFotoAvatar}
+	      				edge="end" 
+	      				alt="Nome do usuario" 
+	      				src={user_profile_foto} />
+	      		</IconButton>
+	      		<Box className={classes.menu_toolbar_title}>
+	      			<Grid>
+	      				<Grid item sm={3}>
+		      				<Typography
+		      					className={classes.toolbar_user_info}
+		      					sm={12}
+		      					>User Name</Typography>
 		      			</Grid>
-		      		</Box>
-		      		<Hidden mdUp>
-		      			<IconButton
-		      			edge="start" 
-		      			color="inherit" 
-		      			aria-label="menu"
-		      			onClick={menu_change}>
+		      			<Typography>
+		      				Runeterra
+		      			</Typography>
+	      			</Grid>
+	      		</Box>
+	      		<Hidden mdUp>
+	      			<IconButton
+	      			edge="start" 
+	      			color="inherit" 
+	      			aria-label="menu"
+	      			onClick={menu_change}>
 
-		            	<MenuIcon />
+	            	<MenuIcon />
 
-		          		</IconButton>
-		      		</Hidden>
-		      	</Toolbar>
-		      	<nav classe={classes.drawer}>
-			      	<Drawer
-			      		container={container}
-			      		open={menu_openned}
-			      		onClose={menu_change}
-			      		anchor="right"
-			      		variant={drawer_variant}
-			      		classes={{ paper: classes.drawer}}
-			      		ModalProps={{
-			              keepMounted: true, // Better open performance on mobile.
-			            }}		      		>
-			      		<List
-			      			className={classes.menu_list} >
-			      			{
-			      				menu_list.map(
-			      					(value, index) =>
-			      						getListItem(value, index, handle_menu_item_click)
-			      						)
-			      			}
-			      		</List>
-			      	</Drawer>
-			    </nav>
-		      </AppBar>
-		</React.Fragment>
+	          		</IconButton>
+	      		</Hidden>
+	      	</Toolbar>
+	      	<nav classe={classes.drawer}>
+		      	<Drawer
+		      		container={container}
+		      		open={menu_openned}
+		      		onClose={menu_change}
+		      		anchor="right"
+		      		variant={drawer_variant}
+		      		classes={{ paper: classes.drawer}}
+		      		ModalProps={{
+		              keepMounted: true, // Better open performance on mobile.
+		            }}		      		>
+		      		<List
+		      			className={classes.menu_list} >
+		      			{
+		      				menu_list.map(
+		      					(value, index) =>
+		      						getListItem(value, index, handle_menu_item_click)
+		      						)
+		      			}
+		      		</List>
+		      	</Drawer>
+		    </nav>
+	      </AppBar>
+	      <div className={classes.toolbar}></div>
+	    </React.Fragment>
 		);
 }
 
