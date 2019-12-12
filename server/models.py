@@ -3,7 +3,7 @@ from app import db
 class Usuario(db.Model):
 	__tablename__ = 'usuario';
 
-	id = db.Column(db.Integer, primary_key = True);
+	id_usuario = db.Column(db.Integer, primary_key = True);
 	nome = db.Column(db.String(50));
 	cpf = db.Column(db.String(11), unique = True, nullable = False);
 	telefone = db.Column(db.String(13));
@@ -19,7 +19,7 @@ class Usuario(db.Model):
 
 	def serialize(self):
 		return {
-			'id'   		: self.id,
+			'id'   		: self.id_usuario,
 			'nome' 		: self.nome,
 			'cpf'		: self.cpf,
 			'telefone'  : self.telefone,
