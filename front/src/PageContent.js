@@ -22,10 +22,33 @@ import {
   ExpandLess
 } from '@material-ui/icons';
 import Produto from './pages/Produto';
+import Categoria from './pages/Categoria';
+import Usuario from './pages/Usuario';
+import Permissoes from './pages/Permissoes';
+
+const style = makeStyles(theme => ({
+  page_title:{
+    textAlign: 'left',
+    padding: '0 5%'
+  }
+}));
 
 function PageContent(props){
+  const { classes } = props;
+  const c = style();
   return (
-      <Produto />
+      <div className={classes}>
+        <Typography 
+          variant="h4" 
+          component="h2"
+          className={c.page_title}>{props.titulo}</Typography>
+        {
+          //<Produto />
+          //<Categoria />
+          <Usuario />
+          //<Permissoes />
+        }
+      </div>
     );
 }
 

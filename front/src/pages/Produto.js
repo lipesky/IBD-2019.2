@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import {
   Grid,
   Button,
+  ButtonGroup,
   IconButton,
   Typography,
   Box,
@@ -15,8 +16,13 @@ import {
   Hidden,
   Container,
   TextField,
-  Select
+  Select,
+  MenuItem,
+  FormControl,
+  FormHelperText,
+  InputLabel
 } from '@material-ui/core';
+
 import {
   Visibility,
   VisibilityOff,
@@ -24,40 +30,98 @@ import {
   ExpandLess
 } from '@material-ui/icons';
 
+import { DeleteIcon } from '@material-ui/icons/Delete';
+import { SaveIcon } from '@material-ui/icons/Save';
+
 const styles = makeStyles(theme => ({
-  toolbar: theme.mixins.toolbar
+  toolbar: theme.mixins.toolbar,
+  text_field: {
+    width: '100%'
+  },
+  select_grid_item: {
+    display: 'flex',
+    flexDirection:'column',
+    justifyContent: 'flex-end',
+    alignItems: 'center'
+  }
 }));
 
 function Produto(props){
   const classes = styles();
   return (
       <Container>
+					<Grid container spacing={2}>
+            
+    				<Grid item sm={6}>
+              <FormControl className={classes.text_field}>
+                <TextField 
+                  className={classes.text_field}
+                  label="Descrição"            
+                />
+              </FormControl>
+            </Grid>
 
-        <Grid>
-          <TextField 
-            label="Descrição"            
-          />
-          <TextField 
-            label="EAN"            
-          />
-          <Select 
-            label="Categoria"
-          />
-          <TextField 
-            label="Peso"            
-          />
-          <TextField 
-            label="Unidade"            
-          />
-          <TextField 
-            label="Preço"            
-          />
-          <TextField 
-            label="Descrição"            
-          />
-          <TextField 
-            label="Descrição"            
-          />
+            <Grid item sm={3}>
+              <FormControl className={classes.text_field}>
+                <TextField 
+                  className={classes.text_field}
+                  label="EAN"            
+                />
+  					 </FormControl>
+            </Grid>
+
+            <Grid item sm={3}>
+              <FormControl className={classes.text_field}>
+                <TextField 
+                  className={classes.text_field}
+                  label="Preço"            
+                />
+  					  </FormControl>
+            </Grid>
+
+    				<Grid item sm={4} className={classes.select_grid_item}>
+              <FormControl className={classes.text_field}>
+                <InputLabel shrink>Categoria</InputLabel>
+                <Select 
+                  className={classes.text_field}
+                  label="Categoria"
+                  value={""}
+                >
+                  <MenuItem value="">Categoria</MenuItem>
+                  <MenuItem value={1}>Item 1</MenuItem>
+                  <MenuItem value={2}>Item 2</MenuItem>
+                  <MenuItem value={3}>Item 3</MenuItem>
+                </Select>
+                {/*<FormHelperText>Categoria</FormHelperText>*/}
+  					  </FormControl>
+            </Grid>
+
+  					<Grid item sm={4}>
+              <FormControl className={classes.text_field}>
+                <TextField 
+                  className={classes.text_field}
+                  label="Peso"            
+                />
+  					  </FormControl>
+            </Grid>
+
+    				<Grid item sm={4}>
+              <FormControl className={classes.text_field}>
+                <TextField 
+                  className={classes.text_field}
+                  label="Unidade"            
+                />
+  					 </FormControl>
+            </Grid>
+
+            <Grid item sm={7}></Grid>
+            <Grid item sm={5}>
+              <ButtonGroup>
+                <Button>Salvar</Button>
+                <Button>Deletar</Button>
+                <Button>Cancelar</Button>
+              </ButtonGroup>
+            </Grid>
         </Grid>
       </Container>
     );
