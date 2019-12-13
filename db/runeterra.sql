@@ -38,7 +38,7 @@ create table categoria (
 create table produto (
 	id_produto integer primary key,
 	id_categoria integer,
-	codigo_de_barra varchar (13),
+	codigo_de_barras varchar (13),
 	nome varchar (100),
 	peso numeric (8,3),
 	unidade varchar (5),
