@@ -25,6 +25,13 @@ import Produto from './pages/Produto';
 import Categoria from './pages/Categoria';
 import Usuario from './pages/Usuario';
 import Permissoes from './pages/Permissoes';
+import Venda from './pages/Venda';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 const style = makeStyles(theme => ({
   page_title:{
@@ -42,12 +49,22 @@ function PageContent(props){
           variant="h4" 
           component="h2"
           className={c.page_title}>{props.titulo}</Typography>
-        {
-          //<Produto />
-          //<Categoria />
-          <Usuario />
-          //<Permissoes />
-        }
+
+          <Route path="/usuario">
+            <Usuario />
+          </Route>
+          <Route path="/produto">
+            <Produto />
+          </Route>
+          <Route path="/categoria">
+            <Categoria />
+          </Route>
+          <Route path="/permissao">
+            <Permissoes />
+          </Route>
+          <Route path="/venda">
+            <Venda />
+          </Route>
       </div>
     );
 }

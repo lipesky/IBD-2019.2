@@ -100,16 +100,6 @@ class ItemVenda(db.Model):
 		self.valor		= valor
 		self.desconto 	= desconto
 
-class UsuarioPermissao(db.Model):
-	__tablename__ = 'usuario_permissao';
-
-	id_usuario   = db.Column(db.Integer, db.ForeignKey('usuario.id_usuario'), primary_key = True);
-	id_permissao = db.Column(db.Integer, db.ForeignKey('permissao.id_permissao'), primary_key = True);
-
-	def __init__(self, id_usuario, id_permissao):
-		self.id_usuario	  = id_usuario
-		self.id_permissao = id_permissao
-
 class Produto(db.Model):
 	__tablename__ = 'produto';
 
@@ -190,3 +180,12 @@ class Produto_categoria(db.Model):
 			'categoria'			: self.id_categoria
 		}
 
+class UsuarioPermissao(db.Model):
+	__tablename__ = 'usuario_permissao';
+
+	id_usuario   = db.Column(db.Integer, db.ForeignKey('usuario.id_usuario'), primary_key = True);
+	id_permissao = db.Column(db.Integer, db.ForeignKey('permissao.id_permissao'), primary_key = True);
+
+	def __init__(self, id_usuario, id_permissao):
+		self.id_usuario	  = id_usuario
+		self.id_permissao = id_permissao

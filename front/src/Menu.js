@@ -28,6 +28,12 @@ import {
   ExpandLess
 } from '@material-ui/icons';
 import user_profile_foto from './img/luscas.png';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 const drawer_width = 300;
 
@@ -75,17 +81,19 @@ function getListItem(item, index, fclick, subitem = false){
 		});
 		return (
 			<React.Fragment key={item.text} >
-				<ListItem 
-					button 
-					key={item.text} 
-					onClick={handle_click}
-					className={subitem ? classes.menu_subitem : ''}>
-					{
-						item.icon ? <ListItemIcon></ListItemIcon> : undefined	
-					}
-					<ListItemText>{item.text}</ListItemText>
-					{item.menu !== undefined ? (item.openned === true ? <ExpandLess /> : <ExpandMore />) : undefined}
-				</ListItem>
+				<Link to={item.link}>
+					<ListItem 
+						button 
+						key={item.text} 
+						onClick={handle_click}
+						className={subitem ? classes.menu_subitem : ''}>
+						{
+							item.icon ? <ListItemIcon></ListItemIcon> : undefined	
+						}
+						<ListItemText>{item.text}</ListItemText>
+						{item.menu !== undefined ? (item.openned === true ? <ExpandLess /> : <ExpandMore />) : undefined}
+					</ListItem>
+				</Link>
 				{
 					item.menu !== undefined ? (
 					<Collapse in={item.openned === true} timeout="auto" unmountOnExit>
@@ -123,13 +131,15 @@ function FMenu(props){
 	        className={classes.AppBar}
 	      >
 	      	<Toolbar className={classes.menu_toolbar}>
-	      		<IconButton className={classes.userProfileFoto}>
-		      		<Avatar 
-	      				className={classes.userProfileFotoAvatar}
-	      				edge="end" 
-	      				alt="Nome do usuario" 
-	      				src={user_profile_foto} />
-	      		</IconButton>
+	      		<Hidden xsUp>
+		      		<IconButton className={classes.userProfileFoto}>
+		      			<Avatar 
+		      				className={classes.userProfileFotoAvatar}
+		      				edge="end" 
+		      				alt="Nome do usuario" 
+		      				src={user_profile_foto} />
+		      		</IconButton>
+	      		</Hidden>
 	      		<Box className={classes.menu_toolbar_title}>
 	      			<Grid>
 	      				<Grid item sm={3}>

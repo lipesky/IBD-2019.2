@@ -18,7 +18,8 @@ var data = {
                 openned: false,
                 menu: [
                   {
-                    text: 'Realizar venda'
+                    text: 'Realizar venda',
+                    link: '/venda'
                   },
                   {
                     text: 'Últimas vendas'
@@ -26,7 +27,16 @@ var data = {
                 ]
               },
               {
-                text: 'Produtos'
+                text: 'Produtos',
+                link: '/produto'
+              },
+              {
+                text: 'Categorias',
+                link: '/categoria'
+              },
+              {
+                text: 'Permissões',
+                link: '/permissoes'
               },
               {
                 text: 'Relatórios',
@@ -42,6 +52,7 @@ var data = {
               },
               {
                 text: 'Usuários',
+                link: '/usuario'
               },
             ]
           };
