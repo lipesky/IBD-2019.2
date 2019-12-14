@@ -1,0 +1,11 @@
+id_produto,id_categoria,codigo_de_barra,nome,peso,unidade,preco
+1,2,11457542454,Sabão em pó,14,cx,3.50
+2,2,21454545457,Amaciante,3kg,kg,5.00
+3,2,34875321456,Detergente,1kg,kg,2.50
+4,2,41111111111,Água sanitária,1kg,kg,5.50
+5,2,51222222222,Esponja,0.50gr,gr,2.00
+6,2,33333333333,Desinfetante,1kg,kg,3.00
+7,2,71478124576,Sabão em pedra,"1,50kg",kg,2.75
+8,2,81457896478,Tira manchas,1kg,kg,6.00
+9,2,91457106307,Saco de lixo 30l,0.50gr,gr,6.00
+10,2,10101786310,Palha de aço,0.50gr,gr,4.00

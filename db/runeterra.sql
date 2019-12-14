@@ -22,7 +22,6 @@ create table vendedor (
 	foreign key (id_vendedor) references usuario (id_usuario)
 );
 
-
 create table venda (
 	id_venda integer primary key,
 	id_vendedor integer,
