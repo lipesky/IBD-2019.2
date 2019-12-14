@@ -3,10 +3,22 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://postgres:1598753@localhost/runedb'
-db = SQLAlchemy(app);
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:1598753@localhost/runedb2'#'postgresql+psycopg2://postgres:1598753@localhost/runedb2'
+#postgresql:usuario:senha@host/nomedobanco
+
+# pip install -U Flask-SQLAlchemy
+# pip install -U Flask-Migrate	
+# pip install -U psycopg2
+db = SQLAlchemy();
+db.init_app(app);
+#db.create_all();
 
 from models import Usuario
+
+with app.app_context():
+	db.create_all();
+
+
 def createUser(data):
 	db.session.add(Usuario(nome = data['nome'],
 						   cpf = data['cpf'],
