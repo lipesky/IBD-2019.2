@@ -1,0 +1,11 @@
+id_produto,id_categoria,codigo_de_barra,nome,peso,unidade,preco
+1,2,77744662524,Sabão em pó,"0,500",Pct,3.50
+2,2,58442887214,Amaciante,3,Pct,5.00
+3,2,73421010956,Detergente,1,Pct,2.50
+4,2,28118784019,Água sanitária,1,Pct,5.50
+5,2,26378171828,Esponja,"0,500",Pct,2.00
+6,2,79541271209,Desinfetante,1,Pct,3.00
+7,2,65505437420,Sabão em pedra,"0,750",Pct,2.75
+8,2,39660678581,Tira manchas,1,Pct,6.00
+9,2,75405213006,Saco de lixo,"0,250",Pct,6.00
+10,2,59163490764,Palha de aço,"0,250",Pct,4.00

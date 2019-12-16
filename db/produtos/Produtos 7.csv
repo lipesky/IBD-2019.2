@@ -1,0 +1,11 @@
+id_produto,id_categoria,codigo_de_barra,nome,peso,unidade,preco
+1,7,16195422633,Presunto,"0,500",Kg,"R$ 5,00"
+2,7,51348682400,Queijo Mussarela,"0,500",Kg,"R$ 5,00"
+3,7,56955687522,Salsicha,1,Kg,"R$ 8,00"
+4,7,32531022740,Peito de Peru,"0,500",Kg,"R$ 8,00"
+5,7,36508076330,Peru,1,Kg,"R$ 10,00"
+6,7,93940697312,Iogurte,"0,200",Kg,"R$ 3,00"
+7,7,14691694925,Peixe,1,Kg,"R$ 5,00"
+8,7,91039445957,Frango,1,Kg,"R$ 4,00"
+9,7,88073489888,Carne seca,1,Kg,"R$ 8,00"
+10,7,35528358424,Carne vermelha,1,Kg,"R$ 10,00"

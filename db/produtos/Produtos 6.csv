@@ -1,0 +1,11 @@
+id_produto,id_categoria,codigo_de_barra,nome,peso,unidade,preco
+1,6,84057809868,Alface,1,Kg,"R$ 6,00"
+2,6,55258465080,Cebola,1,Kg,"R$ 6,00"
+3,6,71545266687,Batata,1,Kg,"R$ 6,00"
+4,6,92102659433,Tomate,1,Kg,"R$ 6,00"
+5,6,39159717951,Cenoura,1,Kg,"R$ 6,00"
+6,6,70809496961,Melancia,1,Kg,"R$ 15,00"
+7,6,54085807041,Salsa,1,Kg,"R$ 3,50"
+8,6,96000824320,Cheiro verde,1,Kg,"R$ 3,50"
+9,6,44537749602,Banana,1,Kg,"R$ 5,00"
+10,6,49706081267,Ovos,1,Pct,"R$ 12,00"
