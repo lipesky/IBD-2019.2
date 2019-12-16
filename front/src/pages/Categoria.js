@@ -56,17 +56,14 @@ function Categoria(props){
               <FormControl className={classes.text_field}>
                 <TextField 
                   className={classes.text_field}
-                  label="Descrição"            
+                  label="Descrição"onChange={props.fields_change('desc')}
+                  value={props.fieldValues.desc}
                 />
               </FormControl>
             </Grid>
             <Grid item sm={7}></Grid>
             <Grid item sm={5}>
-              <ButtonGroup>
-                <Button>Salvar</Button>
-                <Button>Deletar</Button>
-                <Button>Cancelar</Button>
-              </ButtonGroup>
+              { props.button_actions }
             </Grid>
         </Grid>
       </Container>

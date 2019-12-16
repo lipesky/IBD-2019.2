@@ -13,7 +13,10 @@ import {
   ListItemText,
   Collapse,
   Hidden,
-  Container
+  Container,
+  ButtonGroup,
+  Tabs,
+  Tab
 } from '@material-ui/core';
 import {
   Visibility,
@@ -41,8 +44,58 @@ const style = makeStyles(theme => ({
 }));
 
 function PageContent(props){
+  const [fields,  setFields] = React.useState({});
+  const [tabindex,  settabindex] = React.useState(0);
+
+  const handle_change = prop => event => {
+    setFields({...fields, [prop] : event.target.value});
+  } 
+
+  const tab_click = (function (event, newValue){
+    settabindex(newValue);
+  });
+
+  const f_salvar = (function(){
+    var req = new XMLHttpRequest();
+
+    req.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        // tratamento de resposta
+      }
+    };
+    req.open("POST", props.back_url+'/'+props.back_action, true);
+    req.send("fields="+JSON.stringify(fields)+"&acao=salvar");
+  }); // endfunc
+
+  const f_cancelar = (function(){
+    var tempFields = {...fields};
+    for(var x in tempFields){
+      tempFields[x] = '';
+    }
+    setFields(tempFields);
+  }); // endfunc
+
+  const f_deletar = (function(){
+    var req = new XMLHttpRequest();
+
+    req.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        // tratamento de resposta
+      }
+    };
+    req.open("POST", props.back_url+'/'+props.back_action, true);
+    req.send("fields="+JSON.stringify(fields)+"&acao=deletar");
+  }); // endfunc
+
+  const button_actions = (<ButtonGroup>
+                            <Button onClick={f_salvar}>Salvar</Button>
+                            <Button onClick={f_deletar}>Deletar</Button>
+                            <Button onClick={f_cancelar}>Cancelar</Button>
+                          </ButtonGroup>);
+
   const { classes } = props;
   const c = style();
+  console.log(tabindex);
   return (
       <div className={classes}>
         <Typography 
@@ -50,21 +103,53 @@ function PageContent(props){
           component="h2"
           className={c.page_title}>{props.titulo}</Typography>
 
-          <Route path="/usuario">
-            <Usuario />
-          </Route>
-          <Route path="/produto">
-            <Produto />
-          </Route>
-          <Route path="/categoria">
-            <Categoria />
-          </Route>
-          <Route path="/permissao">
-            <Permissoes />
-          </Route>
-          <Route path="/venda">
-            <Venda />
-          </Route>
+          <Tabs onChange={tab_click} value={tabindex}>
+            <Tab label="Informações Cadastrais" />
+            <Tab label="Pesquisa" />
+          </Tabs>
+          <Grid container index={0} hidden={tabindex!==0}>
+            <Grid item xs={12} hidden={false}>
+              <Route path="/usuario">
+                <Usuario 
+                    fields_change={handle_change} 
+                    fieldValues={fields}
+                    button_actions={button_actions} 
+                  />
+              </Route>
+              <Route path="/produto">
+                <Produto 
+                    fields_change={handle_change} 
+                    fieldValues={fields}
+                    button_actions={button_actions} 
+                  />
+              </Route>
+              <Route path="/categoria">
+                <Categoria 
+                    fields_change={handle_change} 
+                    fieldValues={fields}
+                    button_actions={button_actions} 
+                  />
+              </Route>
+              <Route path="/permissao">
+                <Permissoes 
+                    fields_change={handle_change} 
+                    fieldValues={fields}
+                    button_actions={button_actions} 
+                  />
+              </Route>
+              <Route path="/venda">
+                <Venda 
+                    fields_change={handle_change} 
+                    fieldValues={fields}
+                    button_actions={button_actions}  />
+              </Route>    
+            </Grid>
+          </Grid>
+          <Grid container index={1} hidden={tabindex!==1}>
+            <Grid container item xs={12}>
+            </Grid>
+          </Grid>
+          
       </div>
     );
 }

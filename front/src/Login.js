@@ -14,11 +14,29 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  Redirect
 } from "react-router-dom";
 
 
-function Login() {
+function Login(props) {
+  const [fields,  setFields] = React.useState({});
+  const [autenticado,  setAutenticado] = React.useState(false);
+
+  const button_component = (<Button
+                              color="primary"
+                              id="login-button"
+                              variant="contained">
+                              Entrar
+                            </Button>);
+  const button = autenticado ? ([(<Redirect path="/"></Redirect>),button_component]) : button_component;
+
+  const auth = (function(){
+    setAutenticado(false);
+  });
+  const handle_change = prop => event => {
+    setFields({...fields, [prop] : event.target.value});
+  } 
   return (
     
       <section className="login-container">
@@ -28,6 +46,9 @@ function Login() {
             label="E-mail"
             margin="normal"
             className="login-input"
+            nome="email"
+            value={fields.email}
+            onChange={handle_change('email')}
           />
          </div>
           <div className="login-input-container">
@@ -37,15 +58,14 @@ function Login() {
              autoComplete="current-password"
              margin="normal"
              className="login-input"
+             value={fields.senha}
+             onChange={handle_change('senha')}
              />
            </div>
-           <Link to="/">
-             <Button
-              color="primary"
-              id="login-button"
-              variant="contained">
-              Entrar
-            </Button>
+           <Link to="/" onClick={auth}>
+             { 
+              button
+             }
            </Link>
         </form>
       </section>

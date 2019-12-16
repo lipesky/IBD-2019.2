@@ -79,8 +79,20 @@ function getListItem(item, index, fclick, subitem = false){
 				fclick(new_menu_item, index);
 			}
 		});
-		return (
-			<React.Fragment key={item.text} >
+
+		const listItem = item.link == undefined ? (
+				<ListItem 
+						button 
+						key={item.text} 
+						onClick={handle_click}
+						className={subitem ? classes.menu_subitem : ''}>
+						{
+							item.icon ? <ListItemIcon></ListItemIcon> : undefined	
+						}
+						<ListItemText>{item.text}</ListItemText>
+						{item.menu !== undefined ? (item.openned === true ? <ExpandLess /> : <ExpandMore />) : undefined}
+					</ListItem>
+			) : (
 				<Link to={item.link}>
 					<ListItem 
 						button 
@@ -94,9 +106,16 @@ function getListItem(item, index, fclick, subitem = false){
 						{item.menu !== undefined ? (item.openned === true ? <ExpandLess /> : <ExpandMore />) : undefined}
 					</ListItem>
 				</Link>
+			);
+
+		return (
+			<React.Fragment key={item.text} >
 				{
+					[listItem,
 					item.menu !== undefined ? (
-					<Collapse in={item.openned === true} timeout="auto" unmountOnExit>
+					<Collapse in={item.openned === true} timeout="auto" unmountOnExit
+							key={item.text + '-submenu'}
+					>
 						<List disablePadding>
 							{
 								item.menu.map((value, index) => 
@@ -104,7 +123,7 @@ function getListItem(item, index, fclick, subitem = false){
 							}
 						</List>
 					</Collapse>
-					) : undefined }
+					) : undefined] }
 			</React.Fragment>);
 }
 
