@@ -6,7 +6,7 @@ create table usuario (
 	nome varchar (50),
 	cpf char (11),
 	telefone char (13),
-	email varchar (50),
+	email varchar (100),
 	senha char (128)
 );
 
