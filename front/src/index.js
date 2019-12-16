@@ -11,6 +11,7 @@ import {
   Link
 } from "react-router-dom";
 
+var back_url = 'localhost:5000';
 var data = {
             menu:[
               {
@@ -60,10 +61,10 @@ var data = {
 ReactDOM.render(<Router>
                   <Switch>
                     <Route path="/login">
-                      <Login />
+                      <Login back_url={back_url} />
                     </Route>
                     <Route path="/">
-                      <App data={data} />
+                      <App data={data} back_url={back_url} />
                     </Route>
                   </Switch>
                 </Router>, document.getElementById('root'));

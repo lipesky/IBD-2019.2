@@ -73,7 +73,9 @@ function Usuario(props){
               <FormControl className={classes.text_field}>
                 <TextField 
                   className={classes.text_field}
-                  label="Usuario"            
+                  label="Usuario"
+                  onChange={props.fields_change('nome')}
+                  value={props.fieldValues.nome}
                 />
               </FormControl>
             </Grid>
@@ -81,7 +83,9 @@ function Usuario(props){
               <FormControl className={classes.text_field}>
                 <TextField 
                   className={classes.text_field}
-                  label="E-mail"            
+                  label="E-mail"
+                  onChange={props.fields_change('email')}
+                  value={props.fieldValues.email}
                 />
               </FormControl>
             </Grid>
@@ -91,7 +95,9 @@ function Usuario(props){
                   className={classes.text_field}
                   type="password"
                   autoComplete="current-password"
-                  label="Senha"            
+                  label="Senha"
+                  onChange={props.fields_change('password')}
+                  value={props.fieldValues.password}
                 />
               </FormControl>
             </Grid>
@@ -99,9 +105,10 @@ function Usuario(props){
               <FormControl className={classes.text_field}>
                 <TextField 
                   className={classes.text_field}
-                  type="password"
                   autoComplete="current-password"
                   label="Telefone"
+                  onChange={props.fields_change('telefone')}
+                  value={props.fieldValues.telefone}
                 />
               </FormControl>
             </Grid>
@@ -109,9 +116,10 @@ function Usuario(props){
               <FormControl className={classes.text_field}>
                 <TextField 
                   className={classes.text_field}
-                  type="password"
                   autoComplete="current-password"
                   label="CPF"
+                  onChange={props.fields_change('cpf')}
+                  value={props.fieldValues.cpf}
                 />
               </FormControl>
             </Grid>
@@ -120,7 +128,8 @@ function Usuario(props){
                   sm={3}
                   alignItems="center"
                   justify="flex-start"
-                  spacing={2}>
+                  spacing={2}
+                  >
                   
               <Grid item sm={2}>
                 <Checkbox />
@@ -162,11 +171,7 @@ function Usuario(props){
             </Grid>
             <Grid item sm={7}></Grid>
             <Grid item sm={5}>
-              <ButtonGroup>
-                <Button>Salvar</Button>
-                <Button>Deletar</Button>
-                <Button>Cancelar</Button>
-              </ButtonGroup>
+              { props.button_actions }
             </Grid>
         </Grid>
       </Container>

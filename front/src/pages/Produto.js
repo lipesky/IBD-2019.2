@@ -56,7 +56,9 @@ function Produto(props){
               <FormControl className={classes.text_field}>
                 <TextField 
                   className={classes.text_field}
-                  label="Descrição"            
+                  label="Descrição"
+                  onChange={props.fields_change('desc')}
+                  value={props.fieldValues.desc}
                 />
               </FormControl>
             </Grid>
@@ -65,7 +67,9 @@ function Produto(props){
               <FormControl className={classes.text_field}>
                 <TextField 
                   className={classes.text_field}
-                  label="EAN"            
+                  label="EAN"
+                  onChange={props.fields_change('ean')}
+                  value={props.fieldValues.ean}           
                 />
   					 </FormControl>
             </Grid>
@@ -75,6 +79,8 @@ function Produto(props){
                 <TextField 
                   className={classes.text_field}
                   label="Preço"            
+                  onChange={props.fields_change('preco')}
+                  value={props.fieldValues.preco}
                 />
   					  </FormControl>
             </Grid>
@@ -85,9 +91,10 @@ function Produto(props){
                 <Select 
                   className={classes.text_field}
                   label="Categoria"
-                  value={""}
+                  onChange={props.fields_change('categoria')}
+                  value={props.fieldValues.categoria == undefined ? '' : props.fieldValues.categoria}
                 >
-                  <MenuItem value="">Categoria</MenuItem>
+                  <MenuItem value="">Nenhuma</MenuItem>
                   <MenuItem value={1}>Item 1</MenuItem>
                   <MenuItem value={2}>Item 2</MenuItem>
                   <MenuItem value={3}>Item 3</MenuItem>
@@ -100,7 +107,9 @@ function Produto(props){
               <FormControl className={classes.text_field}>
                 <TextField 
                   className={classes.text_field}
-                  label="Peso"            
+                  label="Peso"
+                  onChange={props.fields_change('peso')}
+                  value={props.fieldValues.peso}          
                 />
   					  </FormControl>
             </Grid>
@@ -109,18 +118,16 @@ function Produto(props){
               <FormControl className={classes.text_field}>
                 <TextField 
                   className={classes.text_field}
-                  label="Unidade"            
+                  label="Unidade"
+                  onChange={props.fields_change('unidade')}
+                  value={props.fieldValues.unidade}        
                 />
   					 </FormControl>
             </Grid>
 
             <Grid item sm={7}></Grid>
             <Grid item sm={5}>
-              <ButtonGroup>
-                <Button>Salvar</Button>
-                <Button>Deletar</Button>
-                <Button>Cancelar</Button>
-              </ButtonGroup>
+              { props.button_actions }
             </Grid>
         </Grid>
       </Container>
