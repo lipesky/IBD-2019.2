@@ -2,6 +2,7 @@ import hashlib
 import json
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:1598753@localhost/runedb2'
@@ -42,10 +43,15 @@ def hello():
 
 @app.route("/auth")
 def auth_user():
-	user = Usuario.query.filter_by(nome='felipe', senha=hashlib.sha512('123').hexdigest()).first();
+	user = Usuario.query.filter_by(nome=flask.request.args.post('nome'),
+								   senha=hashlib.sha512(flask.request.args.post('senha')).hexdigest()).first();
+
 	if user == None:
 		return "False";
+		print('>login.. Failed!');
 	else:
+		login_user(user);
+		print('>login..'+json.dumps(user));
 		return json.dumps({
 				"id"	: user.id,
 				"nome"	: user.nome

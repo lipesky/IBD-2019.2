@@ -51,7 +51,7 @@ function App(props) {
 		  	titulo="Categoria"
 		  	/>
           </Route>
-          <Route path="/permissao">
+          <Route path="/permissoes">
             <PageContent
 			back_url={props.back_url}
 			back_action="permissao" 

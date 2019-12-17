@@ -16,13 +16,25 @@ import {
   Container,
   ButtonGroup,
   Tabs,
-  Tab
+  Tab,
+  Table,
+  TableCell,
+  TableHead,
+  TableBody,
+  TableRow,
+  InputBase,
+  FormControl,
+  TextField,
+  InputLabel,
+  Select,
+  MenuItem
 } from '@material-ui/core';
 import {
   Visibility,
   VisibilityOff,
   ExpandMore,
-  ExpandLess
+  ExpandLess,
+  Search
 } from '@material-ui/icons';
 import Produto from './pages/Produto';
 import Categoria from './pages/Categoria';
@@ -38,18 +50,96 @@ import {
 
 const style = makeStyles(theme => ({
   page_title:{
-    textAlign: 'left',
-    padding: '0 5%'
+    textAlign: 'left'
+  },
+  pesquisar:{
+    marginBottom: 10,
+    borderRadius: 4,
+    position: 'relative',
+    backgroundColor: theme.palette.common.white,
+    border: '1px solid #ced4da',
+    fontSize: 16,
+    paddingLeft: 12,
+    transition: theme.transitions.create(['border-color', 'box-shadow'])
+  },
+  text_field: {
+    width: '100%'
+  },
+  pesquisar_button:{
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 15
+  },
+  select_container:{
+    height:60,
+    padding: '0 10px'
+  },
+  tabs:{
+    marginBottom:10
   }
 }));
 
+function get_filtros(){
+  var filtros = [
+                  {
+                    label: 'ID',
+                    value: 'id'
+                  },
+                ];
+  if(window.location.href.includes('/produto')){
+    filtros.push({
+                    label: 'Descricao',
+                    value: 'desc'
+                  });
+    filtros.push({
+                    label: 'Categoria',
+                    value: 'desc'
+                  });
+
+  }else if(window.location.href.includes('/venda')) {
+    filtros.push({
+                    label: 'Data',
+                    value: 'data'
+                  });
+  }else if(window.location.href.includes('/categoria')) {
+    filtros.push({
+                    label: 'Descricao',
+                    value: 'desc'
+                  });
+  }else if(window.location.href.includes('/permissoes')) {
+    filtros.push({
+                    label: 'Descricao',
+                    value: 'desc'
+                  });
+  }else if(window.location.href.includes('/usuario')) {
+    filtros.push({
+                    label: 'Nome',
+                    value: 'nome'
+                  });
+    filtros.push({
+                    label: 'E-mail',
+                    value: 'email'
+                  });
+  }
+
+  return filtros;
+}
+
 function PageContent(props){
   const [fields,  setFields] = React.useState({});
-  const [tabindex,  settabindex] = React.useState(0);
+  const [tabindex,  settabindex] = React.useState(1);
+  const [filtro, setFiltro] = React.useState('id');
 
   const handle_change = prop => event => {
     setFields({...fields, [prop] : event.target.value});
   } 
+
+  const filtros = get_filtros();
+
+  const filtro_change = (function(event){
+    setFiltro(event.target.value);
+  });
 
   const tab_click = (function (event, newValue){
     settabindex(newValue);
@@ -98,57 +188,126 @@ function PageContent(props){
   console.log(tabindex);
   return (
       <div className={classes}>
-        <Typography 
-          variant="h4" 
-          component="h2"
-          className={c.page_title}>{props.titulo}</Typography>
+          <Container>
+            <Typography 
+              variant="h4" 
+              component="h2"
+              className={c.page_title}>{props.titulo}</Typography>
+          </Container>
+        
+          <Container>
+            <Tabs onChange={tab_click} value={tabindex} className={c.tabs}>
+              <Tab label="Informações Cadastrais" />
+              <Tab label="Pesquisa" />
+            </Tabs>
+          </Container>
 
-          <Tabs onChange={tab_click} value={tabindex}>
-            <Tab label="Informações Cadastrais" />
-            <Tab label="Pesquisa" />
-          </Tabs>
-          <Grid container index={0} hidden={tabindex!==0}>
-            <Grid item xs={12} hidden={false}>
-              <Route path="/usuario">
-                <Usuario 
-                    fields_change={handle_change} 
-                    fieldValues={fields}
-                    button_actions={button_actions} 
-                  />
-              </Route>
-              <Route path="/produto">
-                <Produto 
-                    fields_change={handle_change} 
-                    fieldValues={fields}
-                    button_actions={button_actions} 
-                  />
-              </Route>
-              <Route path="/categoria">
-                <Categoria 
-                    fields_change={handle_change} 
-                    fieldValues={fields}
-                    button_actions={button_actions} 
-                  />
-              </Route>
-              <Route path="/permissao">
-                <Permissoes 
-                    fields_change={handle_change} 
-                    fieldValues={fields}
-                    button_actions={button_actions} 
-                  />
-              </Route>
-              <Route path="/venda">
-                <Venda 
-                    fields_change={handle_change} 
-                    fieldValues={fields}
-                    button_actions={button_actions}  />
-              </Route>    
+          <Box hidden={tabindex!==0}>
+            <Grid container>
+              <Grid item xs={12} hidden={false}>
+                <Route path="/usuario">
+                  <Usuario 
+                      fields_change={handle_change} 
+                      fieldValues={fields}
+                      button_actions={button_actions} 
+                    />
+                </Route>
+                <Route path="/produto">
+                  <Produto 
+                      fields_change={handle_change} 
+                      fieldValues={fields}
+                      button_actions={button_actions} 
+                    />
+                </Route>
+                <Route path="/categoria">
+                  <Categoria 
+                      fields_change={handle_change} 
+                      fieldValues={fields}
+                      button_actions={button_actions} 
+                    />
+                </Route>
+                <Route path="/permissoes">
+                  <Permissoes 
+                      fields_change={handle_change} 
+                      fieldValues={fields}
+                      button_actions={button_actions} 
+                    />
+                </Route>
+                <Route path="/venda">
+                  <Venda 
+                      fields_change={handle_change} 
+                      fieldValues={fields}
+                      button_actions={button_actions}  />
+                </Route>    
+              </Grid>
             </Grid>
-          </Grid>
-          <Grid container index={1} hidden={tabindex!==1}>
-            <Grid container item xs={12}>
+          </Box>
+          
+          <Container hidden={tabindex!==1}>
+            <Grid container spacing={2}>
+              <Grid container item xs={9}>
+                <FormControl className={c.text_field + ' ' + c.pesquisar}
+                             variant="outlined">
+                  <Grid container item xs={12}>
+                    <Grid item xs={11}>
+                      <TextField 
+                        className={c.text_field}
+                        variant="standard"
+                        label="Pesquisar"
+                      />
+                    </Grid>
+                    <Grid item xs={1} className={c.pesquisar_button}>
+                      <IconButton>
+                        <Search />
+                      </IconButton>
+                    </Grid>
+                  </Grid>
+                </FormControl>
+              </Grid>
+              <Grid item xs={3}>
+                <FormControl className={c.text_field + ' ' + c.pesquisar + ' '+ c.select_container}>
+                    <InputLabel shrink>Filtro</InputLabel>
+                    <Select 
+                      label="Filtro"
+                      onChange={filtro_change}
+                      value={filtro}
+                    >
+                      {
+                        filtros.map((value, index) => (
+                          <MenuItem value={value.value}>{value.label}</MenuItem>))
+                      }
+                    </Select>
+                </FormControl>
+              </Grid>
+              <Grid container item xs={12}>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>
+                        col 1
+                      </TableCell>
+
+                      <TableCell>
+                        col 2
+                      </TableCell>
+
+                      <TableCell>
+                        col 3
+                      </TableCell>
+                    </TableRow>  
+                  </TableHead>
+
+                  <TableBody>
+                    <TableRow>
+                      <TableCell>
+                        
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </Grid>
             </Grid>
-          </Grid>
+          </Container>
           
       </div>
     );
